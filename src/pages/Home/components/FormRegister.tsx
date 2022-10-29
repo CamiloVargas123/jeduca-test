@@ -17,6 +17,9 @@ export default function FormRegister() {
       const formmated = JSON.parse(users)
       if (formmated.find(item => item.userName === data.userName)) {
         return navigate(PathName.home.login)
+      } else {
+        localStorage.setItem("users", JSON.stringify(formmated.concat(data)))
+        dispath(createUser(data))
       }
     }
     if (!users) {
