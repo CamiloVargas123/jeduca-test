@@ -4,3 +4,5 @@ export interface Articles {
   initialPrice: number
   bidPrice: number
 }
+
+export const EmptyArticles: Articles[] = []

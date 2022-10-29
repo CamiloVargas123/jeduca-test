@@ -6,15 +6,6 @@ import PrivateRouter from './PrivateRouter'
 
 import { FormLogin, FormRegister, LoginOrRegister, OverView, SellArticle } from 'src/pages'
 import { PathName } from 'src/const'
-//component
-/* import LoginForm from '../components/LoginForm/LoginForm'
-import RegisterForm from '../components/RegisterForm/RegisterForm'
- */
-//layout
-/* import LoginOrRegister from '../Layout/LoginOrRegister/LoginOrRegister'
-import User from '../Layout/User/User'
-import Admin from '../Layout/Admin/Admin' */
-
 
 
 

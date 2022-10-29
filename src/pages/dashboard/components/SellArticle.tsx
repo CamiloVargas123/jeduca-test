@@ -1,12 +1,42 @@
-import { Box, Button, FormControl, FormHelperText, Heading, Input, VStack } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, Box, Button, FormControl, FormHelperText, Heading, Input, useToast, VStack } from "@chakra-ui/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Articles } from "src/models";
+import { addArticle } from "src/redux/slices/article";
 
 export default function SellArticle() {
   const { register, handleSubmit, formState: { errors } } = useForm<Articles>()
+  const [invlaidArticle, setInvlaidArticle] = useState(false)
+  const dispatch = useDispatch()
+  const toast = useToast()
 
   function onSubmit(data: Articles) {
-    console.log("🚀 ~ file: sellArticle.tsx ~ line 9 ~ onSubmit ~ data", data)
+    let articles = localStorage.getItem('articles')
+    if (articles) {
+      let formmated = JSON.parse(articles)
+      if (formmated.find(item => item.name === data.name)) return setInvlaidArticle(true)
+      formmated.push(data)
+      setInvlaidArticle(false)
+      dispatch(addArticle(formmated))
+      return toast({
+        title: 'Producto en oferta.',
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+      })
+    }
+    if (!articles) {
+      localStorage.setItem("articles", JSON.stringify([{ ...data }]))
+      dispatch(addArticle([{ ...data }]))
+      setInvlaidArticle(false)
+      return toast({
+        title: 'Producto en oferta.',
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+      })
+    }
   }
 
   return (
@@ -37,6 +67,13 @@ export default function SellArticle() {
 
         <Button type="submit" colorScheme='green'>Vender</Button>
       </Box>
+      {
+        invlaidArticle &&
+        <Alert status='error'>
+          <AlertIcon />
+          <AlertTitle>Ya existe este producto en venta</AlertTitle>
+        </Alert>
+      }
     </VStack>
   )
 }
