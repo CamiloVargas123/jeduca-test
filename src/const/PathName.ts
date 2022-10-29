@@ -5,6 +5,7 @@ export const PathName = {
     login: '/login'
   },
   dashboard: {
-    base: '/dashboard'
+    base: '/dashboard',
+    sell: '/dashboard/sell'
   }
 }
