@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
 import PrivateRouter from './PrivateRouter'
 
-import { FormRegister, LoginOrRegister } from 'src/pages'
+import { FormLogin, FormRegister, LoginOrRegister, OverView } from 'src/pages'
 import { PathName } from 'src/const'
 //component
 /* import LoginForm from '../components/LoginForm/LoginForm'
@@ -25,10 +25,10 @@ export default function Router() {
 
         <Route path={PathName.home.base} element={<PublicRouter><LoginOrRegister /></PublicRouter>}>
           <Route index element={<FormRegister />} />
-          <Route path={PathName.home.login} element={<p>login</p>} />
+          <Route path={PathName.home.login} element={<FormLogin />} />
         </Route>
 
-        <Route path={PathName.dashboard.base} element={<PrivateRouter><p>dashbaord</p></PrivateRouter>} />
+        <Route path={PathName.dashboard.base} element={<PrivateRouter><OverView /></PrivateRouter>} />
 
       </Routes>
     </BrowserRouter>

@@ -10,6 +10,9 @@ export const userState = createSlice({
     createUser: (_, action: PayloadAction<User>) => {
       return action.payload;
     },
+    loginUser: (_, action: PayloadAction<User>) => {
+      return action.payload
+    },
     modifyUser: (state, action: PayloadAction<Partial<User>>) => {
       return { ...state, ...action.payload }
     },
@@ -19,6 +22,6 @@ export const userState = createSlice({
   }
 })
 
-export const { createUser, modifyUser, logoutUser } = userState.actions;
+export const { createUser, modifyUser, logoutUser, loginUser } = userState.actions;
 export const selectUserData = (state: RootState) => state.user
 export default userState.reducer;

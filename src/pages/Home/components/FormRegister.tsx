@@ -1,13 +1,30 @@
-import { Box, Button, FormControl, FormHelperText, Heading, Input, VStack } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormHelperText, Heading, Input, Text, VStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { PathName } from "src/const";
 import { User } from "src/models";
+import { createUser } from "src/redux/slices/user";
 
 export default function FormRegister() {
   const { register, handleSubmit, formState: { errors } } = useForm<User>()
+  const dispath = useDispatch()
+  const navigate = useNavigate()
 
-  function onSubmit(data: User) {
-    console.log(data)
+  async function onSubmit(data: User) {
+    let users = localStorage.getItem('users')
+    if (users) {
+      const formmated = JSON.parse(users)
+      if (formmated.find(item => item.userName === data.userName)) {
+        return navigate(PathName.home.login)
+      }
+    }
+    if (!users) {
+      localStorage.setItem("users", JSON.stringify([{ ...data }]))
+      dispath(createUser(data))
+    }
   }
+
   return (
     <VStack spacing={6}>
       <Heading>Registrarse</Heading>
@@ -53,6 +70,7 @@ export default function FormRegister() {
 
         <Button type="submit" colorScheme='blue'>Registrarse</Button>
       </Box>
+      <Text cursor="pointer" onClick={() => navigate(PathName.home.register)}>Ó acceder</Text>
     </VStack>
   )
 }

@@ -8,5 +8,6 @@ interface Porps {
 }
 export default function PrivateRouter({ children }: Porps) {
   const userData = useSelector(selectUserData)
-  return userData ? children : <Navigate to={PathName.home.login} />
+
+  return userData.id ? children : <Navigate to={PathName.home.login} />
 }

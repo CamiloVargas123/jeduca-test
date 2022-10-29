@@ -8,5 +8,5 @@ interface Porps {
 }
 export default function PublicRouter({ children }: Porps) {
   const userData = useSelector(selectUserData)
-  return !userData ? <Navigate replace to={PathName.dashboard.base} /> : children
+  return userData.id ? <Navigate replace to={PathName.dashboard.base} /> : children
 }
