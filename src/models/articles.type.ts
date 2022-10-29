@@ -3,6 +3,7 @@ export interface Articles {
   description?: string
   initialPrice: number
   bidPrice: number
+  userId: number
 }
 
 export const EmptyArticles: Articles[] = []

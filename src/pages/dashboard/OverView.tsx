@@ -10,7 +10,10 @@ export default function OverView() {
   return (
     <>
       <Box as="header" display="flex" gap={10} justifyContent="end" padding={2} bgColor="blue.200">
-        <Button colorScheme="green" variant="solid" onClick={() => navigate(PathName.dashboard.sell)}>Vender</Button>
+        <Box as="nav" display="flex" gap={8}>
+          <Button colorScheme="green" variant="solid" onClick={() => navigate(PathName.dashboard.base)}>Lista de productos</Button>
+          <Button colorScheme="green" variant="solid" onClick={() => navigate(PathName.dashboard.sell)}>Vender</Button>
+        </Box>
         <Button colorScheme="blue" variant="solid" onClick={() => dispath(logoutUser())}>Logout</Button>
       </Box>
       <Center mt={10}>

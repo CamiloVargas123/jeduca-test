@@ -1,17 +1,20 @@
 import { Alert, AlertIcon, AlertTitle, Box, Button, FormControl, FormHelperText, Heading, Input, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Articles } from "src/models";
 import { addArticle } from "src/redux/slices/article";
+import { selectUserData } from "src/redux/slices/user";
 
 export default function SellArticle() {
   const { register, handleSubmit, formState: { errors } } = useForm<Articles>()
   const [invlaidArticle, setInvlaidArticle] = useState(false)
   const dispatch = useDispatch()
   const toast = useToast()
+  const user = useSelector(selectUserData)
 
   function onSubmit(data: Articles) {
+    if (user.id) data.userId = user.id
     let articles = localStorage.getItem('articles')
     if (articles) {
       let formmated = JSON.parse(articles)

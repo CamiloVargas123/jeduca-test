@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PublicRouter from './PublicRouter'
 import PrivateRouter from './PrivateRouter'
 
-import { FormLogin, FormRegister, LoginOrRegister, OverView, SellArticle } from 'src/pages'
+import { FormLogin, FormRegister, LoginOrRegister, OverView, SellArticle, TableArticles } from 'src/pages'
 import { PathName } from 'src/const'
 
 
@@ -20,6 +20,7 @@ export default function Router() {
         </Route>
 
         <Route path={PathName.dashboard.base} element={<PrivateRouter><OverView /></PrivateRouter>} >
+          <Route index element={<TableArticles />} />
           <Route path={PathName.dashboard.sell} element={<SellArticle />} />
         </Route>
 
